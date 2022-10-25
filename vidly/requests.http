@@ -1,13 +1,12 @@
+http://localhost:3000/
+Accept: application/json
+
 ### get all
 GET http://localhost:3000/api/genres
 Accept: application/json
 
-### get all sorted
-GET http://localhost:3000/api/genres?sortBy=name
-Accept: application/json
-
 ### get one
-GET http://localhost:3000/api/genres/1
+GET http://localhost:3000/api/genres/6357da7a6f72805c0afe0c1f
 Accept: application/json
 
 ### post new genre
@@ -15,16 +14,16 @@ POST http://localhost:3000/api/genres
 Content-Type: application/json
 
 {
-  "name": "action"
+  "name": "fantasy"
 }
 
 ### update genre
-PUT http://localhost:3000/api/genres/7
+PUT http://localhost:3000/api/genres/6357daba6f72805c0afe0c25
 Content-Type: application/json
 
 {
-  "name": "porn"
+  "name": "sci-fi"
 }
 
 ### delete genre
-DELETE http://localhost:3000/api/genres/7
+DELETE http://localhost:3000/api/genres/6357db2dc133365c35c98276
