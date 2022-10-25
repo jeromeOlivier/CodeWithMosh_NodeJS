@@ -1,0 +1,33 @@
+http://localhost:3000/
+Accept: application/json
+
+### get all
+GET http://localhost:3000/api/customers
+Accept: application/json
+
+### get one
+GET http://localhost:3000/api/customers/635800f84387e607cd7206e6
+Accept: application/json
+
+### post new customer
+POST http://localhost:3000/api/customers
+Content-Type: application/json
+
+{
+  "isGold": false,
+  "name": "John Wayne",
+  "phone": "5146661234"
+}
+
+### update customer
+PUT http://localhost:3000/api/customers/6358015b4387e607cd7206ea
+Content-Type: application/json
+
+{
+  "isGold": true,
+  "name": "John Wayne",
+  "phone": "5146661234"
+}
+
+### delete customer
+DELETE http://localhost:3000/api/customers/635801434387e607cd7206e8
