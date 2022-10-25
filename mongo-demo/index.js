@@ -14,12 +14,14 @@ const courseSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['web', 'mobile', 'network']
+    enum: ['web', 'mobile', 'network'],
+    lowercase: true,
+    // uppercase: true,
+    trim: true,
   },
   author: String,
   date: {type: Date, default: Date.now()},
   isPublished: Boolean,
-  price: Number,
   tags: {
     type: Array,
     validate: {
@@ -35,7 +37,11 @@ const courseSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: function() { return this.isPublished; }
+    required: function() { return this.isPublished; },
+    min: 10,
+    max: 200,
+    get: v => Math.round(v), // when price is read
+    set: v => Math.round(v), // when price is saved
   }
 });
 
@@ -43,12 +49,12 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    name: 'Something',
-    author: 'Joe Blow',
-    tags: ['indecisive', 'hesitant'],
-    category: '9',
+    name: 'NestJS',
+    author: 'John McDonald',
+    tags: ['old', 'boring'],
+    category: 'web',
     isPublished: true,
-    price: 15
+    price: 15.8,
   });
 
   try {
@@ -74,4 +80,4 @@ async function createCourse() {
 //     console.log(courses);
 // }
 
-createCourse();
+createCourse().then(() => {});

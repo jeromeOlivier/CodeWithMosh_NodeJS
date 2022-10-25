@@ -1,11 +1,20 @@
 const express = require('express');
 const app = express();
-const genres = require('./routes/genres');
-const home = require('./routes/home');
-
+const mongoose = require('mongoose');
 app.use(express.json());
-app.use('api/genres', genres);
-app.use('/', home);
+require('dotenv').config();
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+mongoose.connect(
+  'mongodb://localhost/vidly',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(() => console.error('MongoDB connection failed'));
+
+app.use('/', require('./routes/hello'));
+app.use('api/genres', require('./routes/genres'));
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
