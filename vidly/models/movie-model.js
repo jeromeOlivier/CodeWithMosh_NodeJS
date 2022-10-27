@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 const { genreSchema } = require("./genre-model");
 
 const movieSchema = new mongoose.Schema({
@@ -30,13 +31,13 @@ const movieSchema = new mongoose.Schema({
 const Movie = mongoose.model("Movie", movieSchema);
 
 function validate(movie) {
-  const schema = {
+  const schema = Joi.object({
     title: Joi.string().min(1).max(128).required(),
-    genreId: Joi.string().required(),
+    genreId: Joi.objectId(),
     numberInStock: Joi.number().min(0).max(32).required(),
     dailyRentalRate: Joi.number().min(0).max(32).required(),
-  };
-  return Joi.validate(movie, schema);
+  });
+  return schema.validate(movie);
 }
 
 exports.movieSchema = movieSchema;
