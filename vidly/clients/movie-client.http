@@ -1,0 +1,32 @@
+### get all movies
+GET http://localhost:3000/api/movies
+Accept: application/json
+
+### get one movie
+GET http://localhost:3000/api/movies/
+Accept: application/json
+
+### post new movie
+POST http://localhost:3000/api/movies
+Content-Type: application/json
+
+{
+  "title": "Stripes",
+  "genreId": "6357e52603351a03c5b81c86",
+  "numberInStock": 3,
+  "dailyRentalRate": 5
+}
+
+### update a movie
+PUT http://localhost:3000/api/movies/id
+Content-Type: application/json
+
+{
+  "title": "Groundhog Day",
+  "genreId": "6357e52603351a03c5b81c86",
+  "numberInStock": 0,
+  "dailyRentalRate": 0
+}
+
+### delete a movie
+DELETE http://localhost:3000/api/movies/id

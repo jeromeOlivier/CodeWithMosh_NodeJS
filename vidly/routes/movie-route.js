@@ -6,7 +6,7 @@ const {
   findAll,
   update,
   deleteOne,
-} = require("../controllers/genre-controller");
+} = require("../controllers/movie-controller");
 
 router.post("/", create);
 router.get("/", findAll);

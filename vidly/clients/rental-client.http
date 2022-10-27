@@ -1,0 +1,13 @@
+### list all rentals
+GET http://localhost:3000/api/rentals
+Accept: application/json
+
+### create a new rental
+POST http://localhost:3000/api/rentals
+Content-Type: application/json
+
+{
+  "movieId": "6359a3d206829614d5259669",
+  "customerId":  "635800f84387e607cd7206e6",
+  "rentalPeriod": 2
+}
