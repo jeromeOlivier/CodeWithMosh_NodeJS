@@ -10,12 +10,9 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res, next) => {
-  try {
-    const genres = await Genre.find().sort("name");
-    res.send(genres);
-  } catch (e) {
-    next(e);
-  }
+  throw new Error("Could not get the genres");
+  const genres = await Genre.find().sort("name");
+  res.send(genres);
 };
 
 exports.findById = async (req, res) => {

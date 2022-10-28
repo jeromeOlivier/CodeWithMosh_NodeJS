@@ -1,3 +1,4 @@
+const winston = require("winston");
 const express = require("express");
 const app = express();
 require("dotenv").config();
@@ -9,6 +10,13 @@ const movies = require("./routes/movie-route");
 const rentals = require("./routes/rental-route");
 const users = require("./routes/user-route");
 const auth = require("./routes/auth-route");
+
+process.on("uncaughtException", (e) => {
+  console.log("SYSTEM ERROR");
+  winston.error(e.message, e);
+});
+
+winston.add(winston.transports.File, { filename: "logfile.log" });
 
 const mongoose = require("mongoose");
 const { application } = require("express");
