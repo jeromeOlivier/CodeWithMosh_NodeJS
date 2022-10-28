@@ -12,18 +12,22 @@ Accept: application/json
 ### post new genre
 POST http://localhost:3000/api/genres
 Content-Type: application/json
+x-auth-token: replace with a valid token
 
 {
-  "name": "comedy"
+  "name": "asian action"
 }
 
 ### update genre
-PUT http://localhost:3000/api/genres/6357daba6f72805c0afe0c25
+PUT http://localhost:3000/api/genres/id
 Content-Type: application/json
+x-auth-token: replace with a valid token
 
 {
   "name": "sci-fi"
 }
 
 ### delete genre
-DELETE http://localhost:3000/api/genres/6357db2dc133365c35c98276
+DELETE http://localhost:3000/api/genres/id
+x-auth-token: replace with a valid token
+

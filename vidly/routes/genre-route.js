@@ -1,3 +1,4 @@
+const auth = require("../middleware/auth-middleware");
 const express = require("express");
 const router = express.Router();
 const {
@@ -8,10 +9,10 @@ const {
   deleteOne,
 } = require("../controllers/genre-controller");
 
-router.post("/", create);
+router.post("/", auth, create);
 router.get("/", findAll);
 router.get("/:id", findById);
-router.put("/:id", update);
-router.delete("/:id", deleteOne);
+router.put("/:id", auth, update);
+router.delete("/:id", auth, deleteOne);
 
 module.exports = router;

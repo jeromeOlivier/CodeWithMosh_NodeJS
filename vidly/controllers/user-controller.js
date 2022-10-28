@@ -1,5 +1,6 @@
 const { validate, User } = require("../models/user-model");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 exports.create = async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -15,5 +16,13 @@ exports.create = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
-  res.send(user);
+
+  const token = jwt.sign(
+    { id: user._id, name: user.name, email: user.email },
+    process.env.JWT
+  );
+  res
+    .header({ "x-auth-token": token })
+    .status(200)
+    .send({ token: token, name: user.name, email: user.email });
 };

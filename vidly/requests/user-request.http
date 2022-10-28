@@ -3,7 +3,7 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Count To Six",
-  "email": "count@tosix.com",
-  "password":  "123456"
+  "name": "Friday",
+  "email": "friday@09.com",
+  "password":  "Friday09"
 }

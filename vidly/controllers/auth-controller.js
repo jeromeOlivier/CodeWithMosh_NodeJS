@@ -2,21 +2,19 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-require("dotenv").config();
 exports.create = async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Authentication failed");
+  if (!user) return res.sendStatus(400).send("Authentication failed");
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send("Authentication failed");
 
-  const token = jwt.sign({ _id: user._id }, process.env.JWT);
+  const token = jwt.sign({ id: user._id }, process.env.JWT);
   res.send(token);
 };
-
 function validate(req) {
   const schema = Joi.object({
     email: Joi.string().max(128).required().email(),
