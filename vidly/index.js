@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-
+const error = require("./middleware/error-middleware");
 const hello = require("./routes/hello-route");
 const genres = require("./routes/genre-route");
 const customers = require("./routes/customer-route");
@@ -29,6 +29,7 @@ app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use(error);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

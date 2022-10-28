@@ -12,7 +12,10 @@ exports.create = async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send("Authentication failed");
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT);
+  const token = jwt.sign(
+    { id: user._id, isAdmin: user.isAdmin },
+    process.env.JWT
+  );
   res.send(token);
 };
 function validate(req) {

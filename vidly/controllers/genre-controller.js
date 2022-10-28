@@ -9,9 +9,13 @@ exports.create = async (req, res) => {
   res.send(genre);
 };
 
-exports.findAll = async (req, res) => {
-  const genres = await Genre.find().sort("name");
-  res.send(genres);
+exports.findAll = async (req, res, next) => {
+  try {
+    const genres = await Genre.find().sort("name");
+    res.send(genres);
+  } catch (e) {
+    next(e);
+  }
 };
 
 exports.findById = async (req, res) => {

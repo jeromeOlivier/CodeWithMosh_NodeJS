@@ -1,4 +1,6 @@
+const tryCatchBlock = require("../middleware/tryCatchBlock");
 const auth = require("../middleware/auth-middleware");
+const admin = require("../middleware/admin-middleware");
 const express = require("express");
 const router = express.Router();
 const {
@@ -9,10 +11,10 @@ const {
   deleteOne,
 } = require("../controllers/movie-controller");
 
-router.post("/", auth, create);
-router.get("/", findAll);
-router.get("/:id", findById);
-router.put("/:id", auth, update);
-router.delete("/:id", auth, deleteOne);
+router.post("/", auth, tryCatchBlock(create));
+router.get("/", tryCatchBlock(findAll));
+router.get("/:id", tryCatchBlock(findById));
+router.put("/:id", auth, tryCatchBlock(update));
+router.delete("/:id", [auth, admin], tryCatchBlock(deleteOne));
 
 module.exports = router;

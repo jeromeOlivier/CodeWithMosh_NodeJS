@@ -12,13 +12,14 @@ exports.create = async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    isAdmin: req.body.isAdmin,
   });
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
 
   const token = jwt.sign(
-    { id: user._id, name: user.name, email: user.email },
+    { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin },
     process.env.JWT
   );
   res
